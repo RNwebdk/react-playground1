@@ -1,27 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import CatNav from './CatNav';
 import data from './data';
 import StatePractice from './StatePractice';
+import TimeArea from './rftrou/TimeArea';
+import LikeArea from './rftrou/LikeArea';
+import Pet from './rftrou/Pet';
+import AddPetForm from './rftrou/AddPetForm';
 
 function App() {
-  // let navLists = data.map((navList, i) => {
-  //   return <CatNav key={i} data={navList} />;
-  // });
-  // console.log(navLists);
-
-  // return (
-  //   <div className='App'>
-  //     <div className='row'>
-  //       <ul className='cat-nav center-align'>{navLists}</ul>
-  //     </div>
-  //   </div>
-  // );
+  const [pets, setPets] = useState([
+    { name: 'Meowsalot', species: 'Cat', age: '5', id: 123456789 },
+    { name: 'Barksalot', species: 'Dog', age: '3', id: 987654321 },
+    { name: 'Fluffy', species: 'Rabbit', age: '2', id: 123123123 },
+    { name: 'Purrsloud', species: 'cat', age: '1', id: 456456456 },
+    { name: 'Paws', species: 'dog', age: '6', id: 789789789 },
+  ]);
+  // const lis = [<li>Ole</li>, <li>Jens</li>, <li>Hans</li>];
 
   return (
-    <div className='App'>
-      <StatePractice />
-    </div>
+    <>
+      <AddPetForm setPets={setPets} />
+      <ul>
+        {pets.map((pet) => {
+          return (
+            <Pet
+              name={pet.name}
+              species={pet.species}
+              age={pet.age}
+              key={pet.id}
+            />
+          );
+        })}
+      </ul>
+    </>
   );
 }
 
